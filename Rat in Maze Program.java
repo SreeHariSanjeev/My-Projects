@@ -33,10 +33,40 @@ class RatMaze
   }
   static void findPath(int matrix[][], int result[][], int curR,int curC, char previous,char direction, int destR,int destC)
   {
-    int i,j;
-    for( i=0; i<r; i++)
-      for( j=0; j<c ;j++)
-         System.out.println(matrix[i][j]);
+    
+     
+    if(curR<r && curC<c)
+    {
+      int i,j;
+      result[curR][curC] = 1;
+      if(matrix[curR][curC] == 1)
+           return;                      //Blocked
+      else                              //matrix[curR][curC] == 0
+      {
+        if(matrix[curR][curC] == matrxi[destR][destC])
+        {
+          for( i=0; i<r; i++)
+            for( j=0; j<c ;j++)
+            System.out.println(result[i][j]);
+          return;
+        }
+        if(previous != 'L')
+          findPath(matrix, result, curR, curC+1, direction, 'R', destR, destC);
+        if(previous != 'U')
+          findPath(matrix, result, curR+1,curC ,direction,'B', destR, destC);
+        if(previous != 'R')
+          findPath(matrix, result, curR,curC-1 ,direction,'L', destR, destC);
+        if(previous != 'B')
+          findPath(matrix, result, curR-1,curC ,direction,'T', destR, destC);
+       
+        
+      }
+      
+      
+    }
+      
+    
+   
     
   }
 }
